@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Palindrome Checker
+{% endblock %}
+{% block body %}
+    <main class="container">
+        <div>
+            <label class="label" for="input-string">
+                Enter your string
+            </label>
+            <form method="get" action="{{ path('palindrome_checker') }}">
+                <input type="text" name="strings" class="input" placeholder="Your string" id="input-string" autocomplete="off"/>
+                <button type="submit">Check</button>
+            </form>
+        </div>
+
+        {% if strings %}
+            <h2>Results for "{{ strings }}"</h2>
+            <table class="table" border="1">
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+
+                {% for key, value in palindrome %}
+                    <tr>
+                        <td>{{ key|replace({'_': ' '})|title }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </main>
+{% endblock %}
